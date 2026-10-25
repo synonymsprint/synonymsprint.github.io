@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["CT9LW48HLS.com.synonymsprint.app"],
+        "components": [
+          { "/": "/c/*", "comment": "Challenge links open in the app" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synonym Sprint</title>
+  <meta name="description" content="Hear a word. Shout its synonyms. Harder words, bigger points. A fast voice word game for iPhone.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main>
+    <div class="logo" aria-hidden="true">⚡️</div>
+    <h1>Synonym Sprint</h1>
+    <p>Hear a word. Shout its synonyms.<br>Harder words, bigger points.</p>
+
+    <a id="get-app" class="button" href="#">Get it on the App Store</a>
+
+    <div class="card">
+      <h2>How it works</h2>
+      <ul class="steps">
+        <li>The game says a word out loud.</li>
+        <li>You say as many synonyms as you can before time runs out.</li>
+        <li>Rare words score more. Clear the whole board for a bonus.</li>
+        <li>Play the Daily Word, race friends live, or study for the SAT and ACT.</li>
+      </ul>
+    </div>
+
+    <footer>
+      <a href="/privacy/">Privacy policy</a>
+    </footer>
+  </main>
+
+  <script src="/config.js"></script>
+  <script>
+    const link = document.getElementById("get-app");
+    if (window.SYNONYM_SPRINT.appStoreURL) {
+      link.href = window.SYNONYM_SPRINT.appStoreURL;
+    } else {
+      link.textContent = "Coming soon to the App Store";
+      link.setAttribute("aria-disabled", "true");
+    }
+  </script>
+</body>
+</html>

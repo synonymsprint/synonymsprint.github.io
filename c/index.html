@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>You've been challenged · Synonym Sprint</title>
+  <meta name="description" content="A friend challenged you to Synonym Sprint. Name more synonyms than they did.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- People who have the app never see this page: the link opens the app directly.
+       Everyone else lands here and is shown how to get the app and keep the challenge. -->
+  <main>
+    <div class="logo" aria-hidden="true">⚡️</div>
+    <h1>You've been challenged!</h1>
+    <p><strong id="name">A friend</strong> scored</p>
+    <div class="score" id="score">?</div>
+    <p>points on the word</p>
+    <div class="word" id="word">?</div>
+    <p class="small" id="difficulty" style="margin-top: 12px;"></p>
+
+    <div class="card">
+      <h2 style="margin-top: 0;">Can you beat them?</h2>
+      <p>Synonym Sprint is a voice word game for iPhone. You'll hear the same word, and you get one round to name as many synonyms as you can.</p>
+      <a id="get-app" class="button" href="#">Get Synonym Sprint</a>
+      <button id="copy" class="button secondary" type="button">Copy this challenge</button>
+      <ol class="steps">
+        <li>Tap <strong>Copy this challenge</strong>.</li>
+        <li>Install Synonym Sprint and open it.</li>
+        <li>On the home screen, tap <strong>Paste</strong> next to “Got a challenge?”</li>
+      </ol>
+    </div>
+
+    <a id="open" class="button secondary" href="#">Already have the app? Open the challenge</a>
+
+    <footer>
+      <a href="/">About Synonym Sprint</a> · <a href="/privacy/">Privacy policy</a>
+    </footer>
+  </main>
+
+  <script src="/config.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const name = params.get("n") || "A friend";
+    const score = Number(params.get("s") || 0);
+    const word = params.get("w") || "";
+    const difficulty = params.get("d") || "medium";
+
+    // textContent keeps anything odd in the link from being treated as page code.
+    document.getElementById("name").textContent = name;
+    document.getElementById("score").textContent = score.toLocaleString("en-US");
+    document.getElementById("word").textContent = word || "a mystery word";
+    document.getElementById("difficulty").textContent =
+      difficulty.charAt(0).toUpperCase() + difficulty.slice(1) + " difficulty";
+    document.title = name + " challenged you · Synonym Sprint";
+
+    // Opens the app straight to this challenge for people who already have it.
+    document.getElementById("open").href = "synonymsprint://challenge" + location.search;
+
+    const getApp = document.getElementById("get-app");
+    if (window.SYNONYM_SPRINT.appStoreURL) {
+      getApp.href = window.SYNONYM_SPRINT.appStoreURL;
+    } else {
+      getApp.textContent = "Coming soon to the App Store";
+      getApp.setAttribute("aria-disabled", "true");
+    }
+
+    // The app's Paste button reads the challenge from this copied link.
+    const copy = document.getElementById("copy");
+    copy.addEventListener("click", async () => {
+      const text = name + " challenged you in Synonym Sprint: " + location.href;
+      try {
+        await navigator.clipboard.writeText(text);
+        copy.textContent = "Copied! Now get the app";
+      } catch {
+        copy.textContent = "Press and hold the address bar to copy the link";
+      }
+    });
+  </script>
+</body>
+</html>
