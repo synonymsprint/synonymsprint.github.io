@@ -15,13 +15,14 @@
     <h1>You've been challenged!</h1>
     <p><strong id="name">A friend</strong> scored</p>
     <div class="score" id="score">?</div>
-    <p>points on the word</p>
-    <div class="word" id="word">?</div>
+    <p>points on a</p>
+    <div class="word">🤫 Mystery word</div>
+    <p class="small" style="margin-top: 12px;">You'll hear the word when your round starts, so no looking it up!</p>
     <p class="small" id="difficulty" style="margin-top: 12px;"></p>
 
     <div class="card">
       <h2 style="margin-top: 0;">Can you beat them?</h2>
-      <p>Synonym Sprint is a voice word game for iPhone. You'll hear the same word, and you get one round to name as many synonyms as you can.</p>
+      <p>Synonym Sprint is a voice word game for iPhone. You'll get the same secret word, and one round to name as many synonyms as you can.</p>
       <a id="get-app" class="button" href="#">Get Synonym Sprint</a>
       <button id="copy" class="button secondary" type="button">Copy this challenge</button>
       <ol class="steps">
@@ -43,13 +44,11 @@
     const params = new URLSearchParams(location.search);
     const name = params.get("n") || "A friend";
     const score = Number(params.get("s") || 0);
-    const word = params.get("w") || "";
     const difficulty = params.get("d") || "medium";
 
     // textContent keeps anything odd in the link from being treated as page code.
     document.getElementById("name").textContent = name;
     document.getElementById("score").textContent = score.toLocaleString("en-US");
-    document.getElementById("word").textContent = word || "a mystery word";
     document.getElementById("difficulty").textContent =
       difficulty.charAt(0).toUpperCase() + difficulty.slice(1) + " difficulty";
     document.title = name + " challenged you · Synonym Sprint";
